@@ -20,14 +20,12 @@ public class HoursWorked extends javax.swing.JDialog {
     */
     
     Finance parentFrame;
-    FormData data;
     
     public HoursWorked(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         
         this.parentFrame = (Finance) parent;
-        data = parentFrame.getData();
         
         this.setLocationRelativeTo(parent.getComponent(0));
         this.setTitle("Hours Worked | EDIT");
@@ -89,9 +87,7 @@ public class HoursWorked extends javax.swing.JDialog {
 
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
         // TODO add your handling code here:
-//        String s = hoursWorkedTxt.getText();
-//        parentFrame.setHoursWorkedText(s);
-        data.setWorkHours(Double.parseDouble(hoursWorkedTxt.getText()));
+        parentFrame.getData().setWorkHours(Double.parseDouble(hoursWorkedTxt.getText()));
         
         this.dispose();
     }//GEN-LAST:event_confirmBtnActionPerformed

@@ -8,6 +8,7 @@ package financeadvisor.Forms;
 import financeadvisor.FormData;
 import financeadvisor.PaymentEntry;
 import financeadvisor.Tool;
+import java.time.LocalDate;
 import javax.swing.ButtonGroup;
 import javax.swing.JList;
 import javax.swing.border.BevelBorder;
@@ -39,28 +40,17 @@ public class Finance extends javax.swing.JFrame {
         btnGroup.add(yearlyRBtn);
         weeklyRBtn.setSelected(true);
         
-        
         data = new FormData();
         
-        
         updateLblNoSign(hoursWorkedLbl, data.getWorkHours());
-        
-//        updateLbl(totalIncomeLbl, data.getTotalIncome());
-        
         
         expenseLst.setModel(data.getModel());
         expenseLst.setSelectedIndex(0);
         
+        selectedDateLbl.setText(data.getSelectedDateToString());
         
-//        double spendingTotal = getTotalSpending(data.getModel());
-//        data.setSpendingTotal(spendingTotal);
-//        updateLbl(totalSpendingLbl, data.getTotalSpending());
-
+        //Tool.sortDescending(data.getModel());
         
-//        double workIncome = data.getWorkIncome();
-//        double grandTotal = workIncome - spendingTotal;
-//        data.setGrandTotal(grandTotal);
-//        updateLbl(grandTotalLbl, data.getGrandTotal());
 
         updateLabels();
     }
@@ -88,19 +78,29 @@ public class Finance extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         descriptionArea = new javax.swing.JTextArea();
-        addExpenseBtn = new javax.swing.JButton();
-        removeExpenseBtn = new javax.swing.JButton();
-        editExpenseBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         totalSpendingLbl = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         grandTotalLbl = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         dailyRBtn = new javax.swing.JRadioButton();
         weeklyRBtn = new javax.swing.JRadioButton();
         monthlyRBtn = new javax.swing.JRadioButton();
         yearlyRBtn = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        selectedDateLbl = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        addExpenseBtn = new javax.swing.JButton();
+        removeExpenseBtn = new javax.swing.JButton();
+        editExpenseBtn = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        highToLowBtn = new javax.swing.JButton();
+        lowToHighBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Finance Advisor -- ZT V0.1");
@@ -202,27 +202,6 @@ public class Finance extends javax.swing.JFrame {
         descriptionArea.setText("Description Text");
         jScrollPane2.setViewportView(descriptionArea);
 
-        addExpenseBtn.setText("Add");
-        addExpenseBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addExpenseBtnActionPerformed(evt);
-            }
-        });
-
-        removeExpenseBtn.setText("Remove");
-        removeExpenseBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeExpenseBtnActionPerformed(evt);
-            }
-        });
-
-        editExpenseBtn.setText("Edit");
-        editExpenseBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editExpenseBtnActionPerformed(evt);
-            }
-        });
-
         jPanel2.setBackground(new java.awt.Color(204, 0, 51));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setToolTipText("Total Spending");
@@ -284,6 +263,8 @@ public class Finance extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         dailyRBtn.setText("Daily");
 
         weeklyRBtn.setText("Weekly");
@@ -292,6 +273,142 @@ public class Finance extends javax.swing.JFrame {
 
         yearlyRBtn.setText("Yearly");
 
+        jButton1.setText("Options");
+
+        jLabel8.setText("Current Date:");
+
+        selectedDateLbl.setText("selectedDateLbl");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(dailyRBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(weeklyRBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(monthlyRBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(yearlyRBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selectedDateLbl)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dailyRBtn)
+                    .addComponent(weeklyRBtn)
+                    .addComponent(monthlyRBtn)
+                    .addComponent(yearlyRBtn)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel8)
+                    .addComponent(selectedDateLbl))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        addExpenseBtn.setText("Add");
+        addExpenseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addExpenseBtnActionPerformed(evt);
+            }
+        });
+
+        removeExpenseBtn.setText("Remove");
+        removeExpenseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeExpenseBtnActionPerformed(evt);
+            }
+        });
+
+        editExpenseBtn.setText("Edit");
+        editExpenseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editExpenseBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Edit Options");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(addExpenseBtn)
+                    .addComponent(editExpenseBtn)
+                    .addComponent(removeExpenseBtn))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addExpenseBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editExpenseBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(removeExpenseBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel10.setText("Sort Options");
+
+        highToLowBtn.setText("High-to-Low");
+        highToLowBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                highToLowBtnActionPerformed(evt);
+            }
+        });
+
+        lowToHighBtn.setText("Low-to-High");
+        lowToHighBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lowToHighBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(highToLowBtn)
+                    .addComponent(lowToHighBtn))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(highToLowBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lowToHighBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -299,14 +416,18 @@ public class Finance extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(hoursBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(addExpenseBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(editExpenseBtn))
-                            .addComponent(removeExpenseBtn)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,24 +440,13 @@ public class Finance extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(dailyRBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(weeklyRBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(monthlyRBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(yearlyRBtn))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(hoursBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -348,12 +458,8 @@ public class Finance extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(hoursBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dailyRBtn)
-                    .addComponent(weeklyRBtn)
-                    .addComponent(monthlyRBtn)
-                    .addComponent(yearlyRBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -367,13 +473,11 @@ public class Finance extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addExpenseBtn)
-                    .addComponent(editExpenseBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(removeExpenseBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -385,33 +489,8 @@ public class Finance extends javax.swing.JFrame {
         HoursWorked hw = new HoursWorked(this, true);
         hw.setVisible(true);
         
-        // --**This is aids and needs fixed**--
-        
         // Continues AFTER HoursWorked Dialog is closed!
         updateLblNoSign(hoursWorkedLbl, data.getWorkHours());
-        
-        // ** THIS IS COMPLETE AIDS
-//        String hoursString = hoursWorkedLbl.getText();
-//        
-//        double newHours = Double.parseDouble(hoursString);
-//        
-//        double newIncomeTotal = newHours * data.getPayRate();
-//        data.setWorkIncome(newIncomeTotal);
-        
-        // ** END OF COMPLETE AIDS
-        
-        //updateLbl(totalIncomeLbl, newIncomeTotal);
-//        updateLbl(totalIncomeLbl, data.getTotalIncome());
-        
-//        String newIncomeString = Tool.roundToString(newIncomeTotal);
-//        totalIncomeLbl.setText("$" + newIncomeString);
-        
-//        double incomeSpending = data.getTotalSpending();
-//        double newGrandTotal = newIncomeTotal - incomeSpending;
-//        data.setGrandTotal(newGrandTotal);
-//        updateLbl(grandTotalLbl, data.getGrandTotal());
-//        String gtString = Tool.roundToString(newGrandTotal);
-//        grandTotalLbl.setText("$" + gtString);
 
         updateLabels();
         
@@ -432,31 +511,9 @@ public class Finance extends javax.swing.JFrame {
         int i = expenseLst.getSelectedIndex();
         
         if (i > -1) {
-            //PaymentEntry pe = (PaymentEntry) data.getModel().getElementAt(i);
-            //double value = pe.getValue();
-            
-            /** OLD MODIFIED CODE
-            double oldGrandTotal = data.getGrandTotal();
-            double grandTotal = oldGrandTotal + value;
-            data.setGrandTotal(grandTotal);
-            updateLbl(grandTotalLbl, grandTotal);
-            */
-            
-//            String s = Tool.roundToString(grandTotal);
-//            grandTotalLbl.setText("$" + s);
             
             data.getModel().remove(i);
             expenseLst.setModel(data.getModel());
-            
-            // NEW MODIFIED CODE
-//            updateLbl(grandTotalLbl, data.getGrandTotal());
-            // *****************************************
-            
-//            double totalSpending = getTotalSpending(data.getModel());
-//            data.setSpendingTotal(totalSpending);
-//            updateLbl(totalSpendingLbl, data.getTotalSpending());
-//            s = Tool.roundToString(totalSpending);
-//            totalSpendingLbl.setText("$" + s);
 
             updateLabels();
 
@@ -488,8 +545,6 @@ public class Finance extends javax.swing.JFrame {
         expenseLst.setModel(data.getModel());
         
         updateLabels();
-//        updateLbl(totalSpendingLbl, data.getTotalSpending());
-//        updateLbl(grandTotalLbl, data.getGrandTotal());
         
     }//GEN-LAST:event_addExpenseBtnActionPerformed
 
@@ -503,10 +558,18 @@ public class Finance extends javax.swing.JFrame {
             expenseLst.setModel(data.getModel());
             
             updateLabels();
-//            updateLbl(totalSpendingLbl, data.getTotalSpending());
-//            updateLbl(grandTotalLbl, data.getGrandTotal());
         }
     }//GEN-LAST:event_editExpenseBtnActionPerformed
+
+    private void lowToHighBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lowToHighBtnActionPerformed
+        // TODO add your handling code here:
+        Tool.sortList(data.getModel(), Tool.SortType.ASCEND);
+    }//GEN-LAST:event_lowToHighBtnActionPerformed
+
+    private void highToLowBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_highToLowBtnActionPerformed
+        // TODO add your handling code here:
+        Tool.sortList(data.getModel(), Tool.SortType.DESCEND);
+    }//GEN-LAST:event_highToLowBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -541,36 +604,7 @@ public class Finance extends javax.swing.JFrame {
         });
     }
     
-//    public double getTotalSpending(DefaultListModel m) {
-//        double spendingTotal = 0;
-//        for (int i = 0; i < m.size(); i++){
-//            PaymentEntry p = (PaymentEntry) m.getElementAt(i);
-//            
-//            spendingTotal += p.getValue();
-//        }
-//        return spendingTotal;
-//    }
-    
     public void updateLabels() {
-        /*
-        double spendingTotal = getTotalSpending(m);
-        data.setSpendingTotal(spendingTotal);
-        updateLbl(l, v);
-        
-        double workIncome = data.getWorkIncome();
-        double grandTotal = workIncome - spendingTotal;
-        data.setGrandTotal(grandTotal);
-        updateLbl(l, v);
-        
-        double newIncomeTotal = newHours * PAY_RATE;
-        data.setWorkIncome(newIncomeTotal);
-        updateLbl(l, v);
-        
-        double incomeSpending = data.getSpendingTotal();
-        double newGrandTotal = newIncomeTotal - incomeSpending;
-        data.setGrandTotal(newGrandTotal);
-        updateLbl(l, v);
-        */
         updateLbl(totalIncomeLbl, data.getTotalIncome());
         updateLbl(totalSpendingLbl, data.getTotalSpending());
         updateLbl(grandTotalLbl, data.getGrandTotal());
@@ -585,11 +619,6 @@ public class Finance extends javax.swing.JFrame {
         String s = Tool.roundToString(value);
         label.setText(s);
     }
-    
-    
-//    public void setHoursWorkedText(String s) {
-//        hoursWorkedLbl.setText(s);
-//    }
 
     public FormData getData() {
         return data;
@@ -609,22 +638,32 @@ public class Finance extends javax.swing.JFrame {
     private javax.swing.JButton editExpenseBtn;
     private javax.swing.JList<String> expenseLst;
     private javax.swing.JLabel grandTotalLbl;
+    private javax.swing.JButton highToLowBtn;
     private javax.swing.JPanel hoursBtn;
     private javax.swing.JLabel hoursWorkedLbl;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton lowToHighBtn;
     private javax.swing.JRadioButton monthlyRBtn;
     private javax.swing.JButton removeExpenseBtn;
+    private javax.swing.JLabel selectedDateLbl;
     private javax.swing.JLabel totalIncomeLbl;
     private javax.swing.JLabel totalSpendingLbl;
     private javax.swing.JRadioButton weeklyRBtn;

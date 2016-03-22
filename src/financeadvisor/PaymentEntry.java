@@ -25,6 +25,14 @@ public class PaymentEntry {
         this.description = "Not added.";
         date = LocalDate.now();
     }
+
+    public PaymentEntry(String name, double value, LocalDate date) {
+        this.name = name;
+        this.value = value;
+        this.description = "Not added.";
+        this.date = date;
+    }
+    
     
     public PaymentEntry(String name, double amount, String des) {
         this.name = name;
