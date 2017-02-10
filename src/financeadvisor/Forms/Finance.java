@@ -33,12 +33,17 @@ public class Finance extends javax.swing.JFrame {
     
     public void initFormData() {
         
-        ButtonGroup btnGroup = new ButtonGroup();
-        btnGroup.add(dailyRBtn);
-        btnGroup.add(weeklyRBtn);
-        btnGroup.add(monthlyRBtn);
-        btnGroup.add(yearlyRBtn);
-        weeklyRBtn.setSelected(true);
+        ButtonGroup dateBtnGroup = new ButtonGroup();
+        dateBtnGroup.add(dailyRBtn);
+        dateBtnGroup.add(weeklyRBtn);
+        dateBtnGroup.add(monthlyRBtn);
+        dateBtnGroup.add(yearlyRBtn);
+        yearlyRBtn.setSelected(true);
+        
+        ButtonGroup sortBtnGroup = new ButtonGroup();
+        sortBtnGroup.add(valueRBtn);
+        sortBtnGroup.add(dateRBtn);
+        valueRBtn.setSelected(true);
         
         data = new FormData();
         
@@ -101,6 +106,9 @@ public class Finance extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         highToLowBtn = new javax.swing.JButton();
         lowToHighBtn = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        valueRBtn = new javax.swing.JRadioButton();
+        dateRBtn = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Finance Advisor -- ZT V0.1");
@@ -385,6 +393,12 @@ public class Finance extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setText("Sort By");
+
+        valueRBtn.setText("Value");
+
+        dateRBtn.setText("Date");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -392,20 +406,35 @@ public class Finance extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(highToLowBtn)
-                    .addComponent(lowToHighBtn))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(highToLowBtn)
+                            .addComponent(jLabel10))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(valueRBtn)
+                            .addComponent(jLabel11)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(lowToHighBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(dateRBtn)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(highToLowBtn)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(highToLowBtn)
+                    .addComponent(valueRBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lowToHighBtn)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lowToHighBtn)
+                    .addComponent(dateRBtn))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -634,6 +663,7 @@ public class Finance extends javax.swing.JFrame {
     private javax.swing.JButton addExpenseBtn;
     private javax.swing.JRadioButton dailyRBtn;
     private javax.swing.JLabel dateLbl;
+    private javax.swing.JRadioButton dateRBtn;
     private javax.swing.JTextArea descriptionArea;
     private javax.swing.JButton editExpenseBtn;
     private javax.swing.JList<String> expenseLst;
@@ -644,6 +674,7 @@ public class Finance extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -666,6 +697,7 @@ public class Finance extends javax.swing.JFrame {
     private javax.swing.JLabel selectedDateLbl;
     private javax.swing.JLabel totalIncomeLbl;
     private javax.swing.JLabel totalSpendingLbl;
+    private javax.swing.JRadioButton valueRBtn;
     private javax.swing.JRadioButton weeklyRBtn;
     private javax.swing.JRadioButton yearlyRBtn;
     // End of variables declaration//GEN-END:variables
